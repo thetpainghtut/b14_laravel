@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Course;
 
 class CourseController extends Controller
 {
@@ -13,7 +14,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Course::all();
+        return view('backend.courses.index',compact('courses'));
     }
 
     /**
@@ -23,7 +25,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.courses.create');
     }
 
     /**
@@ -34,7 +36,34 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request); // (1) black screen
+
+        // Validation // 2 
+        $request->validate([
+            "name" => 'required|min:5|max:191',
+            "logo" => 'required|mimes:jpeg,jpg,png',
+            "outlines" => 'required',
+            "fees" => 'required',
+            "during" => 'required|min:5|max:191',
+            "duration" => 'required|min:5|max:191'
+        ]);
+
+        // Upload if exist // 3
+
+
+        // Store Data // 4
+        $course = new Course;
+        $course->name = request('name');
+        $course->logo = 'logo';
+        $course->outline = request('outlines');
+        $course->fees = request('fees');
+        $course->during = request('during');
+        $course->duration = request('duration');
+
+        $course->save(); // data insert ****
+
+        // Return redirect // 5
+        return redirect()->route('courses.index');
     }
 
     /**
@@ -45,7 +74,11 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        //
+        // $course = Course::find($id);
+
+        $course = Course::findOrFail($id);
+        
+        return view('backend.courses.show',compact('course'));
     }
 
     /**
@@ -56,7 +89,7 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.courses.edit');
     }
 
     /**

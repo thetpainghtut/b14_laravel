@@ -15,13 +15,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('dashboard', function () {
-    return view('backend.dashboard');
-});
+Route::get('dashboard', 'BackendController@dashboard');
 
+Route::resource('courses','CourseController'); 
+// 7 methods
+    //  -> index (getting datas) -> get  (courses)
+    //  -> show (detail view) -> get (courses/1)
 
-Route::resource('courses','CourseController');
+    //  -> create (data insert form) -> get (courses/create)
+    //  -> store (data store) -> post
+    
+    //  -> edit  (data edit form / old value ) -> get (courses/1/edit)
+    // -> update (data update) -> put
 
+    // -> destroy (data delete) -> delete
 
 
 
