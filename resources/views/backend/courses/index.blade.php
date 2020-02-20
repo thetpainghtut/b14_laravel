@@ -28,8 +28,15 @@
               <td>{{$row->duration}}</td>
               <td>
                 <a href="{{route('courses.show',$row->id)}}" class="btn btn-info">Detail</a>
-                <a href="#" class="btn btn-warning">Edit</a>
-                <a href="#" class="btn btn-danger">Delete</a>
+
+                <a href="{{route('courses.edit',$row->id)}}" class="btn btn-warning">Edit</a>
+
+                <form method="post" action="{{route('courses.destroy',$row->id)}}" onsubmit="return confirm('Are you sure?')" class="d-inline-block">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                
               </td>
             </tr>
             @endforeach
