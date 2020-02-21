@@ -49,12 +49,18 @@ class CourseController extends Controller
         ]);
 
         // Upload if exist // 3
-
+        if ($request->hasfile('logo')) {
+            $logo = $request->file('logo');
+            $upload_dir = public_path().'/storage/course/';
+            $name = time().'.'.$logo->getClientOriginalExtension();
+            $logo->move($upload_dir,$name);
+            $path = '/storage/course/'.$name;
+        }
 
         // Store Data // 4
         $course = new Course;
         $course->name = request('name');
-        $course->logo = 'logo';
+        $course->logo = $path;
         $course->outline = request('outlines');
         $course->fees = request('fees');
         $course->during = request('during');
@@ -107,7 +113,7 @@ class CourseController extends Controller
         // Validation // 2 
         $request->validate([
             "name" => 'required|min:5|max:191',
-            "logo" => 'required|mimes:jpeg,jpg,png',
+            "logo" => 'sometimes|mimes:jpeg,jpg,png',
             "outlines" => 'required',
             "fees" => 'required',
             "during" => 'required|min:5|max:191',
@@ -115,12 +121,20 @@ class CourseController extends Controller
         ]);
 
         // Upload if exist // 3
-
+        if ($request->hasfile('logo')) {
+            $logo = $request->file('logo');
+            $upload_dir = public_path().'/storage/course/';
+            $name = time().'.'.$logo->getClientOriginalExtension();
+            $logo->move($upload_dir,$name);
+            $path = '/storage/course/'.$name;
+        }else{
+            $path = request('oldlogo');
+        }
 
         // Update Data // 4
         $course = Course::find($id);
         $course->name = request('name');
-        $course->logo = 'logo';
+        $course->logo = $path;
         $course->outline = request('outlines');
         $course->fees = request('fees');
         $course->during = request('during');

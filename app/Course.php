@@ -12,4 +12,9 @@ class Course extends Model
                           'fees',
                           'during',
                           'duration'];
+
+  public function batches($value='')
+  {
+    return $this->hasMany('App\Batch');
+  }
 }

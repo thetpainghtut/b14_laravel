@@ -27,7 +27,24 @@
           <div class="form-group row">
             <label for="inputLogo" class="col-sm-2 col-form-label">Logo</label>
             <div class="col-sm-10">
-              <input type="file" class="form-control-file" id="inputLogo" name="logo">
+              <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a href="#old" class="nav-link active" data-toggle="tab">Old</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#new" class="nav-link" data-toggle="tab">New</a>
+                </li>
+              </ul>
+
+              <div class="tab-content py-3">
+                <div class="tab-pane fade show active" id="old">
+                  <img src="{{asset($course->logo)}}" class="img-fluid w-25">
+                  <input type="hidden" name="oldlogo" value="{{$course->logo}}">
+                </div>
+                <div class="tab-pane fade" id="new">
+                  <input type="file" class="form-control-file" id="inputLogo" name="logo">
+                </div>
+              </div>
             </div>
           </div>
 

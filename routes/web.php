@@ -30,8 +30,9 @@ Route::resource('courses','CourseController');
 
     // -> destroy (data delete) -> delete
 
+Route::resource('batches','BatchController');
 
-
+Route::resource('students','StudentController');
 
 
 
