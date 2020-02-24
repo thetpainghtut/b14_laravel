@@ -59,6 +59,7 @@
             <label class="col-sm-2 col-form-label">Choose Course</label>
             <div class="col-sm-10">
               <select name="course" class="form-control">
+                <option value="">Select Course</option>
                 @foreach($courses as $row)
                 <option value="{{$row->id}}">{{$row->name}}</option>
                 @endforeach

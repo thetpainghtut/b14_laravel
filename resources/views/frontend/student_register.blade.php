@@ -1,10 +1,15 @@
-@extends('backendtemplate')
-@section('content')
-  <div class="container-fluid">
-    <h4 class="text-center">NEW STUDENT REGISTRATION FORM</h4>
+@extends('frontendtemplate')
 
+@section('content')
+  <div class="container">
     <div class="row">
       <div class="col-md-12">
+        @if (session('status'))
+          <div class="alert alert-success">
+            {{ session('status') }}
+          </div>
+        @endif
+        
         <form method="post" action="{{route('students.store')}}" class="my-3" enctype="multipart/form-data">
           @csrf
           {{-- <h5 class="my-3">Course Informations:</h5>
@@ -223,6 +228,6 @@
           <button type="submit" class="btn btn-primary btn-block">Save Register</button>
         </form>
       </div>
-    </div>
+    </div> 
   </div>
 @endsection
