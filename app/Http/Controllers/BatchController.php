@@ -123,4 +123,11 @@ class BatchController extends Controller
         $batch->delete();
         return redirect()->route('batches.index');
     }
+
+    public function getBatchesByCourse(Request $request)
+    {
+        $cid = request('id');
+        $batches = Batch::where('course_id',$cid)->get();
+        return $batches;
+    }
 }

@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\URL;
 
 class StudentController extends Controller
 {
+    public function __construct($value='')
+    {
+        $this->middleware('auth')->except('store');
+    }
     /**
      * Display a listing of the resource.
      *

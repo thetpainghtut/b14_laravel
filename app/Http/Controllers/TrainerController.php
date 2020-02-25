@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Course;
+use App\Degree;
+use App\Trainer;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class TrainerController extends Controller
 {
@@ -13,7 +18,8 @@ class TrainerController extends Controller
      */
     public function index()
     {
-        //
+        $trainers = Trainer::all();
+        return view('backend.trainers.index',compact('trainers'));
     }
 
     /**
@@ -23,7 +29,9 @@ class TrainerController extends Controller
      */
     public function create()
     {
-        //
+        $courses = Course::all();
+        $degrees = Degree::all();
+        return view('backend.trainers.create',compact('courses','degrees'));
     }
 
     /**
@@ -34,7 +42,27 @@ class TrainerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validation
+
+        // Store 
+        $user = new User;
+        $user->name = request('name');
+        $user->email = request('email');
+        $user->password = Hash::make('123456789');
+        $user->save();
+
+        $user->assignRole('Trainer');
+
+        $trainer = new Trainer;
+
+        $trainer->user_id = $user->id;
+        $trainer->phone = request('phone');
+        $trainer->degree_id = request('degree');
+        $trainer->course_id = request('course');
+        $trainer->address = request('address');
+        $trainer->save();
+
+        return redirect()->route('trainers.index');
     }
 
     /**

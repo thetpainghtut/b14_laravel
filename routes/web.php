@@ -21,7 +21,7 @@ Route::get('detailcourse/{id}','FrontendController@detailCourse')->name('detailc
 
 Route::group([
   // 'name' => 'backend.',
-  // 'middleware' => 'admin',
+  'middleware' => 'auth',
 
   'prefix' => 'backend',
   // 'namespace' => 'Backend'
@@ -47,9 +47,23 @@ Route::group([
   Route::resource('trainers','TrainerController');
   Route::resource('mentors','MentorController');
 
-  Route::resource('students','StudentController');
-
   Route::resource('groups','GroupController');
 });
 
+Route::resource('students','StudentController');
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/testing','HomeController@testing');
+
+
+
+Route::get('/addquizzes','BackendController@addquizzes')->middleware('role:Trainer');
+
+Route::get('/grades','BackendController@grades')->middleware('role:Mentor');
+
+// Group Create
+
+Route::post('getBatchesByCourse','BatchController@getBatchesByCourse')->name('course.batches');
+Route::post('/getstudentformembers','BackendController@getstudentformembers')->name('getstudentformembers');

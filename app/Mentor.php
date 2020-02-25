@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mentor extends Model
 {
-  protected $fillable = ['name','email','phone','avatar','degree_id','address'];
+  protected $fillable = ['user_id','phone','avatar','degree_id','address'];
 }

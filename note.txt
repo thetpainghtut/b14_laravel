@@ -1,0 +1,21 @@
+Laravel Project Upload
+----------------------
+ - create subdomain
+ - create zip project folder
+ - upload zip into subdomain folder
+ - show hidden file in setting (file manager)
+ - extract zip file
+ - move files and folders into subdomain folder
+ - create .htaccess (will upload fb group)
+ - edit database config
+    - .env (database name , username, password)
+
+
+ - cpanel/mysql database
+    - create a database
+    - create a user
+    - add user to database
+
+ - export database from localhost/phpmyadmin
+ - import database into cpanel/phpmyadmin
+

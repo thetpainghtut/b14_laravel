@@ -18,6 +18,8 @@
   <!-- Custom styles for this template-->
   <link href="{{ asset('sb_admin/css/sb-admin-2.min.css')}}" rel="stylesheet">
 
+  <!-- Select 2 -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body id="page-top">
@@ -406,6 +408,15 @@
   <!-- Page level custom scripts -->
   <script src="{{ asset('sb_admin/js/demo/chart-area-demo.js')}}"></script>
   <script src="{{ asset('sb_admin/js/demo/chart-pie-demo.js')}}"></script>
+
+  <!-- Select 2 -->
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+  
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.js-example-basic-multiple').select2();
+    });
+  </script>
   @yield('script')
 </body>
 

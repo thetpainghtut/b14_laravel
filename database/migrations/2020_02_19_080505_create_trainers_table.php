@@ -15,8 +15,7 @@ class CreateTrainersTable extends Migration
     {
         Schema::create('trainers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->unsignedBigInteger('user_id');
             $table->string('phone');
             $table->string('avatar')->default('storage/default/testing.png');
             $table->unsignedBigInteger('degree_id');
@@ -24,9 +23,14 @@ class CreateTrainersTable extends Migration
             $table->text('address');
             $table->timestamps();
 
+            $table->foreign('user_id')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
+
             $table->foreign('degree_id')
                   ->references('id')->on('degrees')
                   ->onDelete('cascade');
+                  
             $table->foreign('course_id')
                   ->references('id')->on('courses')
                   ->onDelete('cascade');

@@ -13,4 +13,9 @@ class Student extends Model
     return $this->belongsToMany('App\Subject')
                 ->withTimestamps();
   }
+
+  public function groups()
+  {
+    return $this->belongsToMany('App\Group')->withTimestamps();
+  }
 }

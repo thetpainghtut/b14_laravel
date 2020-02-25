@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Group;
+use App\Course;
+use App\Batch;
 
 class GroupController extends Controller
 {
@@ -25,7 +27,9 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view('backend.groups.create');
+        $courses = Course::all();
+        $batches = Batch::all();
+        return view('backend.groups.create',compact('courses','batches'));
     }
 
     /**
@@ -36,7 +40,22 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "course" => 'required',
+            "batch" => 'required',
+            "name" => 'required|max:100',
+            "members" => 'required'
+        ]);
+
+        $group = new Group;
+
+        $group->name = request('name');
+        $group->batch_id = request('batch');
+        $group->save();
+
+        $group->students()->attach(request('members'));
+
+        return back()->with('status',$group->name." Group created successfully");
     }
 
     /**

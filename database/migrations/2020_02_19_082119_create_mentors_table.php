@@ -15,8 +15,7 @@ class CreateMentorsTable extends Migration
     {
         Schema::create('mentors', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->unsignedBigInteger('user_id');
             $table->string('phone');
             $table->string('avatar')->default('storage/default/mentor.jpg');
             $table->unsignedBigInteger('degree_id');
@@ -25,6 +24,10 @@ class CreateMentorsTable extends Migration
             $table->text('address');
             $table->timestamps();
 
+            $table->foreign('user_id')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
+                  
             $table->foreign('degree_id')
                   ->references('id')->on('degrees')
                   ->onDelete('cascade');
